@@ -5,6 +5,7 @@ import seaborn as sns
 
 
 def get_dataset() -> pd.DataFrame:
+    '''Function to download boston dataset using direct link.'''
     # Function sklearn.datasets.load_boston is deprecated since scikit-learn 1.2
     # That is alternative from scikit-learn.org
     data_url = "http://lib.stat.cmu.edu/datasets/boston"
@@ -15,6 +16,7 @@ def get_dataset() -> pd.DataFrame:
     return pd.concat([pd.DataFrame(data), pd.DataFrame(target)], axis=1)
 
 def main():
+    '''Main function.'''
     dataset = get_dataset()
     cor_mat = dataset.corr()
     sns.heatmap(cor_mat)
