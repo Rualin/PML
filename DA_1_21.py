@@ -61,7 +61,11 @@ def calculate_correlation(dataset: pd.DataFrame) -> pd.DataFrame | None:
     '''
     try:
         dataset = dataset.select_dtypes(include="number")
-        return dataset.corr()
+        if dataset.size != 0: # Check that dataset is not empty after removing non-numeric columns.
+            return dataset.corr()
+        else:
+            print("Warning! Dataset doesn't contain numeric columns!")
+            return None
     except Exception as e:
         print(f"Exception raised during correlation calculation: {e}")
         return None
