@@ -36,7 +36,7 @@
 
     ```python
     # Загрузка стандартного Boston dataset
-    from my_analysis_module import get_dataset
+    from DA_1_21 import get_dataset
 
     URL = "https://lib.stat.cmu.edu/datasets/boston"
     COLUMNS = ["CRIM", "ZN", "INDUS", "CHAS", "NOX", "RM", "AGE", "DIS", "RAD", "TAX", "PTRATIO", "B", "LSTAT", "MEDV"]
@@ -61,7 +61,7 @@
     **Пример использования:**
 
     ```python
-    from my_analysis_module import calculate_correlation
+    from DA_1_21 import calculate_correlation
 
     # Предположим, что `my_dataframe` - это любой DataFrame с числовыми данными
     correlation_matrix = calculate_correlation(my_dataframe)
@@ -84,7 +84,7 @@
     **Пример использования:**
 
     ```python
-    from my_analysis_module import draw_heatmap
+    from DA_1_21 import draw_heatmap
 
     # Визуализация матрицы корреляции
     draw_heatmap(correlation_matrix, save_name="analysis/correlation_heatmap.png")
