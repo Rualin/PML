@@ -34,6 +34,8 @@
 
     ```categoric_col_name (str)```: Название категориального столбца, по которому производится группировка.
 
+    ```statistics_names (list[str])```: Список статистик, которые будут вычислены. Подается в функцию ```groupby.agg```
+
     **Возвращаемое значение:**
 
     ```pd.DataFrame | None```: DataFrame с рассчитанной статистикой или None в случае ошибки.
@@ -44,7 +46,12 @@
     from DA_1_21 import calculate_numeric_column_statistics
 
     ## Расчет статистики для столбца 'sepal length (cm)' по категориям 'species'
-    statistics = calculate_numeric_column_statistics(df, "sepal length (cm)", "species")
+    statistics = calculate_numeric_column_statistics(
+            df=df,
+            column_name="sepal length (cm)",
+            categoric_col_name="species",
+            statistics_names=["mean", "std", "count"],
+        )
 
     if statistics is not None:
         print(statistics.head())
