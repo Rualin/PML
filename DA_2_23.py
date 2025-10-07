@@ -1,4 +1,3 @@
-import numpy as np
 import pandas as pd
 
 from DA_1_07 import create_categorical_feature
