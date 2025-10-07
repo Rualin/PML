@@ -4,7 +4,12 @@ from DA_1_07 import create_categorical_feature
 from DA_1_07 import load_iris_dataset
 
 
-def calculate_numeric_column_statistics(df: pd.DataFrame, column_name: str, categoric_col_name: str) -> pd.DataFrame | None:
+def calculate_numeric_column_statistics(
+        df: pd.DataFrame,
+        column_name: str,
+        categoric_col_name: str,
+        statistics_names: list[str],
+    ) -> pd.DataFrame | None:
     '''
     Function to calculate statistics by categories for given column.
 
@@ -16,6 +21,8 @@ def calculate_numeric_column_statistics(df: pd.DataFrame, column_name: str, cate
         The name of column to which statistics will be calculated
     categoric_col_name: str
         The name of column which contains the categorical data that statistics will be grouped by
+    statistics_names: list[str]
+        The list of statistics name to put un function groupby.agg
 
     Returns
     -------
@@ -24,7 +31,7 @@ def calculate_numeric_column_statistics(df: pd.DataFrame, column_name: str, cate
     '''
     try:
         grouped = df.groupby(categoric_col_name, observed=False)
-        agged = grouped[column_name].agg(["mean", "std", "count"])
+        agged = grouped[column_name].agg(statistics_names)
         agged = agged.add_prefix(column_name + "_", axis="columns")
         return agged.reset_index()
     except Exception as e:
@@ -79,7 +86,12 @@ def main():
         data, feature_names, target = load_iris_dataset()
         df = create_categorical_feature(data, feature_names, target)
 
-        stats = calculate_numeric_column_statistics(df, "sepal length (cm)", "species")
+        stats = calculate_numeric_column_statistics(
+            df=df,
+            column_name="sepal length (cm)",
+            categoric_col_name="species",
+            statistics_names=["mean", "std", "count"],
+        )
         if stats is None:
             return
 
